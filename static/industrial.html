@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业通信工作台 — ModuBoard</title>
+    <meta name="description" content="本地只读的 Modbus 与 OPC UA 调试、解析和多测点订阅工作台">
+    <meta property="og:title" content="ModuBoard 工业通信工作台">
+    <meta property="og:description" content="Modbus / OPC UA 调试 · 真实只读">
+    <meta property="og:image" content="http://127.0.0.1:5000/static/og.png">
+    <link rel="stylesheet" href="/static/css/style.css?v=8">
+    <link rel="stylesheet" href="/static/css/industrial.css?v=3">
+</head>
+<body class="iw-body">
+    <header class="iw-toolbar">
+        <div class="iw-brand">
+            <span class="iw-logo">⌁</span>
+            <div><strong>工业通信工作台</strong><small>真实只读 · Modbus / OPC UA Subscription</small></div>
+        </div>
+        <nav class="iw-protocol-switch" aria-label="协议工作区">
+            <button id="iw-tab-modbus" class="iw-active">Modbus</button>
+            <button id="iw-tab-opc">OPC UA Subscription</button>
+        </nav>
+        <div class="iw-actions">
+            <label class="iw-runtime-mode"><i></i><select id="iw-runtime-mode" aria-label="运行模式"><option value="real" selected>真实设备（只读）</option><option value="simulation">离线模拟</option></select></label>
+            <span id="iw-graph-actions" class="iw-action-group">
+                <button id="iw-zoom-out" class="iw-icon-btn" title="缩小">−</button>
+                <span id="iw-zoom-label" class="iw-zoom-label">100%</span>
+                <button id="iw-zoom-in" class="iw-icon-btn" title="放大">＋</button>
+                <button id="iw-fit" class="iw-icon-btn iw-text-btn" title="适合窗口">适合</button>
+                <button id="iw-reset" class="iw-icon-btn iw-text-btn" title="恢复默认布局">重置</button>
+            </span>
+            <button id="iw-theme" class="iw-icon-btn" title="切换主题">◐</button>
+            <button id="iw-self-check" class="iw-icon-btn iw-text-btn" title="检查现场运行环境">现场自检</button>
+            <a href="/" class="iw-icon-btn iw-text-btn">返回看板</a>
+            <button id="iw-run" class="iw-run">运行流程</button>
+        </div>
+    </header>
+
+    <main id="iw-main" class="iw-main">
+        <aside id="iw-modbus-rail" class="iw-rail" aria-label="Modbus 流程节点">
+            <span class="iw-rail-title">FLOW</span>
+            <button data-focus="connection"><b>01</b><span>连接</span></button>
+            <button data-focus="request"><b>02</b><span>请求</span></button>
+            <button data-focus="decoder"><b>03</b><span>解释</span></button>
+            <button data-focus="output"><b>04</b><span>结果</span></button>
+            <button data-focus="log"><b>05</b><span>日志</span></button>
+        </aside>
+
+        <div id="iw-viewport" class="iw-viewport">
+            <div id="iw-graph" class="iw-graph">
+                <canvas id="iw-links" width="1500" height="850" aria-hidden="true"></canvas>
+
+                <section class="iw-node" data-node="connection" style="left:60px;top:90px;width:280px">
+                    <header class="iw-node-head"><span><i>01</i> Connection</span><em>连接</em></header>
+                    <div class="iw-node-body">
+                        <input type="hidden" data-key="protocol_family" value="modbus">
+                        <label class="iw-wide">常用模板<select id="iw-modbus-preset"><option value="gateway0100">现场网关 · 0100</option><option value="nt_voltage_c">NT 馈线 · C 相电压</option><option value="blank">空白配置</option></select></label>
+                        <button id="iw-apply-modbus-preset" class="iw-quiet-btn" type="button">载入模板</button>
+                        <label>Transport<select data-key="transport" id="iw-transport"><option value="modbus_tcp">Modbus TCP</option><option value="rtu_over_tcp">RTU over TCP（透明串口）</option><option value="modbus_rtu">Modbus RTU（本机串口）</option></select></label>
+                        <div class="iw-conn" data-conn="network">
+                            <label>Host / IP<input data-key="host" value="215.8.24.139"></label>
+                            <label>Port<input data-key="port" value="502"></label>
+                            <label>Timeout (s)<input data-key="timeout" value="3"></label>
+                            <label>Retries<input data-key="retries" value="0"></label>
+                        </div>
+                        <div class="iw-conn iw-hidden" data-conn="modbus_rtu">
+                            <label>Serial Port<input data-key="serial_port" value="COM3" list="iw-serial-ports"></label>
+                            <label>Baud Rate<select data-key="baud_rate"><option>9600</option><option>19200</option><option>38400</option><option>57600</option><option>115200</option></select></label>
+                            <label>Parity<select data-key="parity"><option value="N">None (N)</option><option value="E">Even (E)</option><option value="O">Odd (O)</option></select></label>
+                            <label>Stop Bits<select data-key="stopbits"><option value="1">1</option><option value="2">2</option></select></label>
+                            <label>Timeout (s)<input data-key="timeout" value="3"></label>
+                            <label>Retries<input data-key="retries" value="0"></label>
+                        </div>
+                        <datalist id="iw-serial-ports"></datalist>
+                    </div><span class="iw-port iw-port-out"></span>
+                </section>
+
+                <section class="iw-node" data-node="request" style="left:400px;top:90px;width:320px">
+                    <header class="iw-node-head"><span><i>02</i> Request</span><em>请求</em></header>
+                    <div class="iw-node-body">
+                        <label>Function<select data-key="operation" id="iw-operation">
+                            <option value="1">FC01 Read Coils</option><option value="2">FC02 Read Discrete Inputs</option>
+                            <option value="3" selected>FC03 Read Holding Registers</option><option value="4">FC04 Read Input Registers</option>
+                            <option value="5">FC05 Write Single Coil</option><option value="6">FC06 Write Single Register</option>
+                            <option value="15">FC0F Write Multiple Coils</option><option value="16">FC10 Write Multiple Registers</option>
+                        </select></label>
+                        <div class="iw-grid">
+                            <label>Unit ID<input data-key="unit_id" value="15"></label>
+                            <label>Quantity<input data-key="quantity" id="iw-quantity" value="1"></label>
+                            <label>Address Mode<select data-key="address_mode" id="iw-address-mode"></select></label>
+                            <label>Address<input data-key="address" id="iw-address" value="256"></label>
+                            <label id="iw-write-values-field" class="iw-wide iw-hidden">Write Values<input data-key="write_values" id="iw-write-values" placeholder="单值，或逗号分隔多个值"></label>
+                            <div class="iw-address-map iw-wide"><span id="iw-address-caption">4xxxx Reference 40001</span><b>→</b><span id="iw-offset">Protocol Offset 0</span></div>
+                        </div>
+                        <div id="iw-write-warning" class="iw-warning iw-hidden">写功能仅供离线模拟；真实设备模式不会发送写请求。</div>
+                    </div><span class="iw-port iw-port-in"></span><span class="iw-port iw-port-out"></span>
+                </section>
+
+                <section class="iw-node" data-node="decoder" style="left:780px;top:90px;width:280px">
+                    <header class="iw-node-head"><span><i>03</i> Decoder</span><em>数据解释</em></header>
+                    <div class="iw-node-body">
+                        <div class="iw-grid">
+                            <label class="iw-wide">Raw HEX Bytes<input data-key="raw_hex" id="iw-raw" value="00 00 43 5C"></label>
+                            <label>Data Type<select data-key="data_type" id="iw-data-type"></select></label>
+                            <label id="iw-order-field">Byte / Word Order<select data-key="byte_order"><option selected>ABCD</option><option>BADC</option><option>CDAB</option><option>DCBA</option></select></label>
+                            <label id="iw-scale-field">Scale<input data-key="scale" value="1"></label>
+                            <label id="iw-decode-offset-field">Offset<input data-key="decode_offset" value="0"></label>
+                            <label id="iw-bit-index-field" class="iw-hidden">Bit Index (0–15)<input data-key="bit_index" value="0"></label>
+                            <label id="iw-encoding-field" class="iw-hidden">Encoding<input data-key="encoding" value="utf-8"></label>
+                        </div>
+                        <p id="iw-decode-hint" class="iw-note">原始寄存器与工程量解释保持分离。</p>
+                    </div><span class="iw-port iw-port-in"></span><span class="iw-port iw-port-out"></span>
+                </section>
+
+                <section class="iw-node iw-node-output" data-node="output" style="left:1120px;top:90px;width:300px">
+                    <header class="iw-node-head"><span><i>04</i> Output</span><em id="iw-result-status">等待</em></header>
+                    <div class="iw-node-body"><div id="iw-result" class="iw-result-empty"><strong>等待运行</strong><span>真实模式将直接访问所填设备</span></div></div>
+                    <span class="iw-port iw-port-in"></span><span class="iw-port iw-port-out"></span>
+                </section>
+
+                <section class="iw-node iw-node-log" data-node="log" style="left:780px;top:500px;width:640px">
+                    <header class="iw-node-head"><span><i>05</i> Transaction Log</span><em>Raw preserved</em></header>
+                    <div class="iw-node-body"><div id="iw-log" class="iw-log-empty">运行后显示 TX / RX 记录</div></div><span class="iw-port iw-port-in"></span>
+                </section>
+            </div>
+        </div>
+
+        <div id="iw-opc-workspace" class="iw-opc-workspace iw-hidden">
+            <aside class="iw-opc-sidebar">
+                <section class="iw-opc-panel">
+                    <header class="iw-panel-head">
+                        <div><span>01</span><strong>Server Connection</strong><small>建立 Session</small></div>
+                        <em id="opc-connection-status" class="iw-status iw-status-offline">未连接</em>
+                    </header>
+                    <div class="iw-panel-body iw-form-grid">
+                        <label class="iw-wide">Endpoint URL<input id="opc-endpoint" value="opc.tcp://215.8.229.11:4840/opcua"></label>
+                        <label>Security Mode<select id="opc-security-mode"><option>None</option><option>Sign</option><option>SignAndEncrypt</option></select></label>
+                        <label>Security Policy<select id="opc-security-policy"><option>None</option></select></label>
+                        <label class="iw-wide">Authentication<select id="opc-authentication"><option>Anonymous</option><option>Username / Password</option><option>Certificate</option></select></label>
+                        <label class="iw-auth-field iw-hidden">Username<input id="opc-username" autocomplete="username"></label>
+                        <label class="iw-auth-field iw-hidden">Password<input id="opc-password" type="password" autocomplete="current-password"></label>
+                        <label class="iw-security-file iw-wide iw-hidden">Client Certificate<input id="opc-certificate" placeholder="D:\certs\client_cert.der"></label>
+                        <label class="iw-security-file iw-wide iw-hidden">Private Key<input id="opc-private-key" placeholder="D:\certs\client_key.pem"></label>
+                        <label>Timeout (s)<input id="opc-timeout" value="5"></label>
+                        <label>Application URI<input id="opc-application-uri" value="urn:moduboard:industrial:client"></label>
+                        <button id="opc-disconnect" class="iw-quiet-btn" disabled>断开</button>
+                        <button id="opc-connect" class="iw-secondary">连接 Server</button>
+                    </div>
+                </section>
+
+                <section class="iw-opc-panel iw-browser-panel">
+                    <header class="iw-panel-head">
+                        <div><span>02</span><strong>Address Space</strong><small>选择多个 Variable</small></div>
+                        <em id="opc-selected-count">0 已选</em>
+                    </header>
+                    <div class="iw-panel-body">
+                        <div class="iw-browse-controls">
+                            <input id="opc-browse-nodeid" value="i=85" aria-label="Browse NodeId">
+                            <button id="opc-browse" class="iw-quiet-btn">Browse</button>
+                        </div>
+                        <div id="opc-browse-location" class="iw-browse-location">Objects · i=85</div>
+                        <input id="opc-search" class="iw-search" placeholder="搜索名称或 NodeId">
+                        <div id="opc-browser" class="iw-browser-list" aria-label="OPC UA 地址空间"></div>
+                        <button id="opc-add-selected" class="iw-secondary">添加选中测点</button>
+                        <details class="iw-custom-point">
+                            <summary>手动录入 NodeId</summary>
+                            <label>Display Name<input id="opc-custom-name" placeholder="例如：冷冻水供水温度"></label>
+                            <label>NodeId<input id="opc-custom-nodeid" placeholder="ns=2;s=BMS.Chiller.SupplyTemp"></label>
+                            <button id="opc-add-custom" class="iw-quiet-btn">添加 MonitoredItem</button>
+                        </details>
+                    </div>
+                </section>
+            </aside>
+
+            <section class="iw-opc-panel iw-subscription-panel">
+                <header class="iw-subscription-head">
+                    <div>
+                        <span class="iw-eyebrow">ACTIVE SUBSCRIPTION</span>
+                        <input id="opc-subscription-name" value="Critical Operations" aria-label="Subscription 名称">
+                        <p>一个 Subscription 管理多个 MonitoredItem；配置、状态与时间戳集中呈现。</p>
+                    </div>
+                    <div class="iw-subscription-actions">
+                        <button id="opc-load-critical" class="iw-quiet-btn">载入示例点表</button>
+                        <button id="opc-save-profile" class="iw-quiet-btn">保存配置</button>
+                        <button id="opc-clear" class="iw-quiet-btn">清空测点</button>
+                        <button id="opc-stop" class="iw-secondary" disabled>停止</button>
+                        <button id="opc-start" class="iw-run">开始订阅</button>
+                    </div>
+                </header>
+
+                <div class="iw-subscription-config">
+                    <label>Publishing Interval (ms)<input id="opc-publishing" type="number" min="1" value="1000"></label>
+                    <label>KeepAlive Count<input id="opc-keepalive" type="number" min="1" value="10"></label>
+                    <label>Lifetime Count<input id="opc-lifetime" type="number" min="3" value="60"></label>
+                    <label>Priority<input id="opc-priority" type="number" min="0" max="255" value="0"></label>
+                    <div class="iw-subscription-rule"><b>采样属于 Item</b><span>Sampling / Queue / Deadband 可逐测点配置</span></div>
+                </div>
+
+                <div class="iw-live-summary">
+                    <div><span>MonitoredItems</span><strong id="opc-metric-total">0</strong></div>
+                    <div><span>Good</span><strong id="opc-metric-good">0</strong></div>
+                    <div><span>Active Alarm</span><strong id="opc-metric-alarm">0</strong></div>
+                    <div><span>Last Publish</span><strong id="opc-metric-publish">—</strong></div>
+                    <p><b>★</b> 标记关键测点，作为后续 Mini BMS 的优先清单。</p>
+                </div>
+
+                <div class="iw-table-wrap">
+                    <table class="iw-item-table">
+                        <thead><tr><th title="关键测点">★</th><th>Display Name / NodeId</th><th>Data Type</th><th>Sampling (ms)</th><th>Queue</th><th>Deadband</th><th>Value</th><th>StatusCode</th><th>SourceTimestamp</th><th>ServerTimestamp</th><th>ReceiveTime</th><th></th></tr></thead>
+                        <tbody id="opc-item-body"></tbody>
+                    </table>
+                    <div id="opc-empty-items" class="iw-empty-items"><strong>尚未配置 MonitoredItem</strong><span>从左侧地址空间选择多个测点，或载入关键测点模板。</span></div>
+                </div>
+
+                <footer class="iw-opc-log">
+                    <span>Subscription Log</span>
+                    <div id="opc-log">等待连接与订阅操作</div>
+                </footer>
+            </section>
+        </div>
+    </main>
+    <div id="iw-toast" class="iw-toast" role="status"></div>
+    <script src="/static/js/industrial-workbench.js?v=4"></script>
+</body>
+</html>

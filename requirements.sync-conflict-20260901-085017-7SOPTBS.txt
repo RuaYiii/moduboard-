@@ -1,0 +1,8 @@
+flask>=3.0
+flask-cors>=4.0
+requests>=2.31
+akshare>=1.16
+duckdb>=0.10
+opcua==0.98.13
+pymodbus==3.6.9
+pyserial==3.5

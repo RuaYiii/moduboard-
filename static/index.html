@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModuBoard — 模块化工作台</title>
+    <meta name="description" content="可无限拓展的模块化看板工作台">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=8">
+</head>
+<body>
+    <!-- ===== 顶部工具栏 ===== -->
+    <header id="toolbar">
+        <div class="toolbar-left">
+            <h1 class="logo">📋 ModuBoard</h1>
+            <div class="toolbar-divider"></div>
+            <!-- 配置选择器 -->
+            <div class="config-selector">
+                <select id="config-select" title="切换工作界面"></select>
+                <button id="btn-save-config" class="btn-toolbar" title="保存配置">
+                    <span class="btn-icon-inner">💾</span>
+                </button>
+                <button id="btn-new-config" class="btn-toolbar" title="新建配置">
+                    <span class="btn-icon-inner">➕</span>
+                </button>
+                <button id="btn-delete-config" class="btn-toolbar" title="删除配置">
+                    <span class="btn-icon-inner">🗑️</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="toolbar-center">
+            <a href="/industrial" class="btn-toolbar" title="打开全屏工业通信节点工作台">
+                <span>⌁ 工业工作台</span>
+            </a>
+            <button id="btn-add-module" class="btn-primary">
+                <span>+ 添加模块</span>
+            </button>
+        </div>
+
+        <div class="toolbar-right">
+            <!-- 缩放控制 -->
+            <div class="zoom-controls">
+                <button id="btn-zoom-out" class="btn-toolbar" title="缩小 (Ctrl+-)">−</button>
+                <span id="zoom-level" class="zoom-display">100%</span>
+                <button id="btn-zoom-in" class="btn-toolbar" title="放大 (Ctrl++)">+</button>
+                <button id="btn-zoom-reset" class="btn-toolbar" title="重置视图 (Ctrl+0)">⟲</button>
+            </div>
+            <div class="toolbar-divider"></div>
+            <!-- 主题切换 -->
+            <button id="btn-theme-toggle" class="btn-toolbar" title="切换主题">🌙</button>
+        </div>
+    </header>
+
+    <!-- ===== 无限画布 ===== -->
+    <div id="viewport">
+        <div id="canvas"></div>
+    </div>
+
+    <!-- ===== 模块面板（右侧滑出） ===== -->
+    <div id="module-palette" class="palette hidden">
+        <div class="palette-header">
+            <h2>添加模块</h2>
+            <button id="btn-close-palette" class="btn-icon">✕</button>
+        </div>
+        <div class="palette-search">
+            <input type="text" id="palette-search-input" placeholder="搜索模块名称或标签…" autocomplete="off" />
+        </div>
+        <div id="palette-list" class="palette-list">
+            <!-- 由 JS 动态填充 -->
+        </div>
+    </div>
+
+    <!-- ===== 模块设置弹窗 ===== -->
+    <div id="module-settings-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="settings-modal-title">模块设置</h3>
+                <button class="btn-icon modal-close">✕</button>
+            </div>
+            <div id="module-settings-body" class="modal-body">
+                <!-- 由 JS 动态填充设置表单 -->
+            </div>
+            <div class="modal-footer">
+                <button id="btn-settings-cancel" class="btn-secondary">取消</button>
+                <button id="btn-settings-save" class="btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Toast 通知容器 ===== -->
+    <div id="toast-container"></div>
+
+    <!-- ===== 全局缩放坐标修正（必须在图表引擎之前加载） ===== -->
+    <script src="/static/js/globalScaleFix.js?v=1"></script>
+
+    <!-- ===== 模块专属引擎 ===== -->
+    <script src="/static/js/simulator-engine.js?v=11"></script>
+    <script src="/static/js/kline-engine.js?v=4"></script>
+
+    <!-- ===== 主入口 ===== -->
+    <script type="module" src="/static/js/app.js?v=12"></script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+{
+  "name": "default",
+  "created_at": "2026-08-30T12:25:27.765Z",
+  "theme": "light",
+  "grid_size": 20,
+  "viewport": {
+    "scale": 1.1094529817875147,
+    "offset_x": -3720.189486919352,
+    "offset_y": -2268.770244856369
+  },
+  "modules": [
+    {
+      "id": "mod_calc_001",
+      "type": "calculator",
+      "grid_x": 138,
+      "grid_y": -18,
+      "grid_w": 24,
+      "grid_h": 32,
+      "config": {},
+      "state": {
+        "display": "0",
+        "expression": "",
+        "last_result": null,
+        "new_input": true
+      }
+    },
+    {
+      "id": "mod_hello_001",
+      "type": "hello_world",
+      "grid_x": 72,
+      "grid_y": -11,
+      "grid_w": 16,
+      "grid_h": 16,
+      "config": {
+        "greeting": "你好，世界！111",
+        "color": "#333333"
+      },
+      "state": {
+        "click_count": 32,
+        "current_index": 4
+      }
+    },
+    {
+      "id": "mod_weather_1783841422657_900",
+      "type": "weather",
+      "grid_x": 43,
+      "grid_y": 15,
+      "grid_w": 24,
+      "grid_h": 16,
+      "config": {
+        "city_name": "黄山",
+        "lat": 29.71,
+        "lon": 118.34
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_data_clock_1783842836458_361",
+      "type": "data_clock",
+      "grid_x": 75,
+      "grid_y": 8,
+      "grid_w": 25,
+      "grid_h": 11,
+      "config": {},
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783846411780_617",
+      "type": "sys_quote",
+      "grid_x": 67,
+      "grid_y": -24,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "DCE.jd2609",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783858281078_133",
+      "type": "sys_quote",
+      "grid_x": 39,
+      "grid_y": -12,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2609",
+        "size": "small",
+        "default_color": "#ff4d4f"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_system_logger_1783859844433_738",
+      "type": "system_logger",
+      "grid_x": 104,
+      "grid_y": -26,
+      "grid_w": 33,
+      "grid_h": 39,
+      "config": {},
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783859853156_261",
+      "type": "sys_quote",
+      "grid_x": 67,
+      "grid_y": -18,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "sz002624",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783861240973_852",
+      "type": "sys_quote",
+      "grid_x": 89,
+      "grid_y": 107,
+      "grid_w": 12,
+      "grid_h": 7,
+      "config": {
+        "symbol": "KQ.m@SHFE.rb2610",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783863148117_350",
+      "type": "sys_quote",
+      "grid_x": 67,
+      "grid_y": -30,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "DCE.jd2608",
+        "size": "small",
+        "default_color": "#ff4d4f"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783863189845_125",
+      "type": "sys_quote",
+      "grid_x": 79,
+      "grid_y": -27,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "DCE.jd2610",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783863282420_232",
+      "type": "sys_quote",
+      "grid_x": 54,
+      "grid_y": -27,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "DCE.jd2607",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783864405287_429",
+      "type": "sys_quote",
+      "grid_x": 39,
+      "grid_y": -18,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2608",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783864442506_342",
+      "type": "sys_quote",
+      "grid_x": 42,
+      "grid_y": -24,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2607",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1783864497607_281",
+      "type": "sys_quote",
+      "grid_x": 42,
+      "grid_y": -6,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2610",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_watchlist_1783865501227_264",
+      "type": "sys_watchlist",
+      "grid_x": -22,
+      "grid_y": -21,
+      "grid_w": 30,
+      "grid_h": 17,
+      "config": {
+        "symbols": "sz002624, sz000681, sh601008"
+      },
+      "state": {
+        "order": [
+          "sz002624",
+          "sh601008",
+          "sz000681"
+        ]
+      }
+    },
+    {
+      "id": "mod_sys_watchlist_1783867983849_703",
+      "type": "sys_watchlist",
+      "grid_x": -22,
+      "grid_y": -4,
+      "grid_w": 30,
+      "grid_h": 22,
+      "config": {
+        "symbols": "CZCE.FG2607, CZCE.FG2608, CZCE.FG2609, CZCE.FG2610, CZCE.FG2612"
+      },
+      "state": {
+        "order": [
+          "CZCE.FG2607",
+          "CZCE.FG2609",
+          "CZCE.FG2610",
+          "CZCE.FG2612",
+          "CZCE.FG2608"
+        ]
+      }
+    },
+    {
+      "id": "mod_sys_watchlist_1783868171893_851",
+      "type": "sys_watchlist",
+      "grid_x": 9,
+      "grid_y": -4,
+      "grid_w": 29,
+      "grid_h": 21,
+      "config": {
+        "symbols": "DCE.jd2607, DCE.jd2608, DCE.jd2609, DCE.jd2610, DCE.jd2611, DCE.jd2612"
+      },
+      "state": {
+        "order": [
+          "DCE.jd2607",
+          "DCE.jd2608",
+          "DCE.jd2609",
+          "DCE.jd2610",
+          "DCE.jd2611",
+          "DCE.jd2612"
+        ]
+      }
+    },
+    {
+      "id": "mod_sys_quote_1784351028226_803",
+      "type": "sys_quote",
+      "grid_x": 42,
+      "grid_y": 0,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2611",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1784351044655_724",
+      "type": "sys_quote",
+      "grid_x": 42,
+      "grid_y": 7,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "CZCE.fg2612",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_display_test_1784649314622_579",
+      "type": "sys_display_test",
+      "grid_x": 61,
+      "grid_y": 38,
+      "grid_w": 32,
+      "grid_h": 30,
+      "config": {},
+      "state": {
+        "tab": 5
+      }
+    },
+    {
+      "id": "mod_sys_quote_1784693160092_240",
+      "type": "sys_quote",
+      "grid_x": 30,
+      "grid_y": -30,
+      "grid_w": 12,
+      "grid_h": 6,
+      "config": {
+        "symbol": "KQ.m@CZCE.MA",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_kline_v2_1785031913184_639",
+      "type": "sys_kline_v2",
+      "grid_x": -27,
+      "grid_y": 36,
+      "grid_w": 38,
+      "grid_h": 26,
+      "config": {
+        "symbol": "【股】SZSE.002624 完美世界",
+        "period": "D"
+      },
+      "state": {
+        "last_period": "D",
+        "last_symbol": "【股】SZSE.002624 完美世界"
+      }
+    },
+    {
+      "id": "mod_sys_kline_v2_1785032343956_588",
+      "type": "sys_kline_v2",
+      "grid_x": -61,
+      "grid_y": 54,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "symbol": "SHFE.rb2610 螺纹2610",
+        "period": "D"
+      },
+      "state": {
+        "last_period": "D",
+        "last_symbol": "SHFE.rb2610 螺纹2610"
+      }
+    },
+    {
+      "id": "mod_sys_spread_1785045148136_394",
+      "type": "sys_spread",
+      "grid_x": -30,
+      "grid_y": 108,
+      "grid_w": 34,
+      "grid_h": 26,
+      "config": {
+        "product": "FG",
+        "viewpoint": "自动主力",
+        "width": "3",
+        "days": "120",
+        "custom_start": "",
+        "custom_end": "",
+        "gap": "1"
+      },
+      "state": {
+        "last_view": "spread",
+        "last_period": "D",
+        "extras": [],
+        "band_on": true
+      }
+    },
+    {
+      "id": "mod_sys_spread_1785054028427_13",
+      "type": "sys_spread",
+      "grid_x": -68,
+      "grid_y": 105,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "product": "RB",
+        "viewpoint": "自动主力",
+        "width": "3",
+        "days": "120",
+        "custom_start": "",
+        "custom_end": "",
+        "gap": "1"
+      },
+      "state": {
+        "last_view": "spread",
+        "last_period": "D",
+        "extras": [],
+        "band_on": false
+      }
+    },
+    {
+      "id": "mod_sys_spread_1785054043712_550",
+      "type": "sys_spread",
+      "grid_x": 54,
+      "grid_y": 87,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "product": "FG",
+        "viewpoint": "自动主力",
+        "width": "3",
+        "days": "120",
+        "custom_start": "",
+        "custom_end": "",
+        "gap": "1"
+      },
+      "state": {
+        "last_view": "spread",
+        "last_period": "D",
+        "extras": [],
+        "band_on": false
+      }
+    },
+    {
+      "id": "mod_sys_spread_custom_1785056618099_283",
+      "type": "sys_spread_custom",
+      "grid_x": 7,
+      "grid_y": 118,
+      "grid_w": 32,
+      "grid_h": 20,
+      "config": {
+        "product": "FG",
+        "days": "120",
+        "custom_start": "2025-03-26",
+        "custom_end": "2025-07-26",
+        "viewpoint": "FG2506"
+      },
+      "state": {
+        "last_period": "D",
+        "pairs": [
+          "FG2610-FG2608",
+          "FG2510-FG2508",
+          "FG2509-FG2508"
+        ],
+        "band_on": true
+      }
+    },
+    {
+      "id": "mod_sys_spread_custom_1785071301315_812",
+      "type": "sys_spread_custom",
+      "grid_x": 15,
+      "grid_y": 90,
+      "grid_w": 27,
+      "grid_h": 25,
+      "config": {
+        "product": "FG",
+        "days": "120",
+        "custom_start": "",
+        "custom_end": "",
+        "viewpoint": "FG2608"
+      },
+      "state": {
+        "last_period": "1m",
+        "pairs": [
+          "FG2610-FG2608",
+          "FG2509-FG2507",
+          "FG2510-FG2508",
+          "FG2609-FG2611",
+          "FG2609-FG2608"
+        ],
+        "band_on": true
+      }
+    },
+    {
+      "id": "mod_sys_spread_1785073584233_841",
+      "type": "sys_spread",
+      "grid_x": -35,
+      "grid_y": 137,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "product": "FG",
+        "viewpoint": "FG2508",
+        "width": "3",
+        "days": "120",
+        "custom_start": "",
+        "custom_end": "",
+        "gap": "1"
+      },
+      "state": {
+        "last_view": "spread",
+        "last_period": "D",
+        "extras": [],
+        "band_on": true
+      }
+    },
+    {
+      "id": "mod_sys_kline_1785858227787_603",
+      "type": "sys_kline",
+      "grid_x": 133,
+      "grid_y": 77,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "symbol": "SHFE.fg2609",
+        "period": "daily"
+      },
+      "state": {
+        "last_period": "daily",
+        "last_symbol": "SHFE.fg2609"
+      }
+    },
+    {
+      "id": "mod_sys_kline_v2_1785861924555_584",
+      "type": "sys_kline_v2",
+      "grid_x": -94,
+      "grid_y": 54,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "symbol": "CZCE.FG2609 玻璃2609",
+        "period": "D"
+      },
+      "state": {
+        "last_period": "D",
+        "last_symbol": "CZCE.FG2609 玻璃2609"
+      }
+    },
+    {
+      "id": "mod_sys_stoploss_1786198310205_811",
+      "type": "sys_stoploss",
+      "grid_x": 58,
+      "grid_y": 114,
+      "grid_w": 28,
+      "grid_h": 30,
+      "config": {
+        "product": "RB",
+        "contract": "自动主力",
+        "period": "D",
+        "atr_n": "14",
+        "tr_rows": "10"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_quote_1786777973318_935",
+      "type": "sys_quote",
+      "grid_x": 101,
+      "grid_y": 101,
+      "grid_w": 14,
+      "grid_h": 6,
+      "config": {
+        "symbol": "KQ.m@DCE.jm",
+        "size": "small",
+        "default_color": "#000000"
+      },
+      "state": {}
+    },
+    {
+      "id": "mod_sys_kline_v2_1786778107230_298",
+      "type": "sys_kline_v2",
+      "grid_x": 120,
+      "grid_y": 132,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "symbol": "SHFE.rb2610 螺纹2610",
+        "period": "D"
+      },
+      "state": {
+        "last_symbol": "SHFE.rb2610 螺纹2610",
+        "last_period": "D"
+      }
+    },
+    {
+      "id": "mod_sys_kline_1787232228642_497",
+      "type": "sys_kline",
+      "grid_x": 167,
+      "grid_y": 77,
+      "grid_w": 32,
+      "grid_h": 24,
+      "config": {
+        "symbol": "SHFE.rb2610",
+        "period": "daily"
+      },
+      "state": {
+        "last_period": "daily",
+        "last_symbol": "SHFE.rb2610"
+      }
+    },
+    {
+      "id": "mod_industrial_debugger_1788087706370_438",
+      "type": "industrial_debugger",
+      "grid_x": 193,
+      "grid_y": 107,
+      "grid_w": 34,
+      "grid_h": 36,
+      "config": {},
+      "state": {
+        "protocol_family": "modbus",
+        "transport": "modbus_tcp",
+        "operation": "3",
+        "host": "192.168.1.50",
+        "port": "502",
+        "serial_port": "COM3",
+        "baud_rate": "9600",
+        "endpoint": "opc.tcp://192.168.1.100:4840",
+        "security_mode": "None",
+        "security_policy": "None",
+        "authentication": "Anonymous",
+        "node_id": "ns=2;s=PowerSystem.Incoming01.VoltageA",
+        "publishing_interval": "1000",
+        "sampling_interval": "1000",
+        "queue_size": "10",
+        "unit_id": "1",
+        "address_mode": "reference_4x",
+        "address": "40001",
+        "quantity": "2",
+        "data_type": "float32",
+        "byte_order": "CDAB",
+        "raw_hex": "00 00 43 5C",
+        "result": {
+          "ok": true,
+          "title": "模拟请求成功",
+          "value": "220",
+          "raw": "00 00 43 5C",
+          "meta": "FC03 · holding_registers · 协议偏移 0 · 3.28 ms"
+        },
+        "logs": [
+          {
+            "time": "19:02:21",
+            "kind": "发送",
+            "text": "站号 1 · FC03 · 地址 0 · 数量 2"
+          },
+          {
+            "time": "19:02:21",
+            "kind": "接收",
+            "text": "00 00 43 5C"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_industrial_decoder_1788087722945_757",
+      "type": "industrial_decoder",
+      "grid_x": 226,
+      "grid_y": 110,
+      "grid_w": 21,
+      "grid_h": 24,
+      "config": {},
+      "state": {
+        "raw_hex": "00 00 43 5C",
+        "data_type": "float32",
+        "byte_order": "CDAB",
+        "bit_index": "0",
+        "scale": "1",
+        "offset": "0",
+        "unit": "V",
+        "result": null
+      }
+    }
+  ]
+}
